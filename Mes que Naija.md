@@ -77,6 +77,14 @@ for every player and the ball at 25 frames per second, and the league itself rec
 status (alive or dead) and which team had possession on every frame. We downloaded them from
 https://huggingface.co/datasets/pysport/idsse-data.
 
+**How much.** 7 matches, 1,002,644 labelled frames in total (the two halves of each match, 137,214
+to 146,810 frames per match). After our label translation they split into 291,759 frames of home
+possession, 261,346 of away possession and 449,539 of dead ball. The judge is trained on every
+fifth frame of three degraded copies of each match.
+
+**Who labelled it.** The German league (DFL), as part of its official match data. Nobody in our
+team labelled a single frame of any match.
+
 - No labels from the competition match were used.
 - We made no hand labels at all.
 - The 5 public minutes were used only as a format and sanity check and never to choose a setting.
