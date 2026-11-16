@@ -1,0 +1,23 @@
+{
+ "no_tags": {
+  "emission_weight": 0.3,
+  "switch_cost": 4.0,
+  "dead_in_cost": 14.0,
+  "dead_out_cost": 14.0,
+  "loose_cost": 3.0,
+  "loose_mix": 0.5,
+  "min_control_frames": 50,
+  "min_dead_frames": 12
+ },
+ "tags": {
+  "emission_weight": 0.1,
+  "switch_cost": 2.0,
+  "dead_in_cost": 8.0,
+  "dead_out_cost": 8.0,
+  "loose_cost": 3.0,
+  "loose_mix": 0.5,
+  "min_control_frames": 50,
+  "min_dead_frames": 12
+ },
+ "variant": "tags"
+}

@@ -62,3 +62,12 @@ __pycache__/
 venv/
 env/
 .DS_Store
+
+# -- Mes que Naija: local-only folders ---------------------------------------------------------
+# Caches hold the match tracking in another format, so they are as private as data/ itself.
+.cache/
+external_data/
+.scratch/
+submission/
+.ruff_cache/
+.pytest_cache/
