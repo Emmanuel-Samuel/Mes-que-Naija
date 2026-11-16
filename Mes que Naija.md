@@ -115,6 +115,31 @@ vanished, so the two numbers cannot be compared. On the 5 public minutes ours re
 only 17 possessions, so it is noisy. Our final file has 225 possessions averaging 15.7 seconds,
 and 44.3% of graded frames are dead (the German matches have 41 to 52%).
 
+### Which model is best? Our own comparison
+
+We tested six kinds of judge on the same seven degraded German matches, with the same clues,
+labels and scoring. For every model the smoother settings for a test match were chosen on the
+other six matches' predictions (a simpler scheme than the nested one above, which is why our own
+judge reads 0.718 here and 0.719 there).
+
+| judge | spellF1, mean | lowest to highest match | without the smoother |
+|---|---|---|---|
+| boosted trees (submitted) | 0.718 | 0.681 to 0.759 | 0.266 |
+| small recurrent network (BiGRU) | 0.715 | 0.676 to 0.748 | 0.337 |
+| temporal convolution network (TCN) | 0.709 | 0.666 to 0.736 | 0.318 |
+| boosted trees feeding a recurrent network | 0.702 | 0.682 to 0.725 | 0.468 |
+| logistic regression | 0.660 | 0.604 to 0.707 | 0.211 |
+| extra trees | 0.654 | 0.614 to 0.679 | 0.280 |
+
+The top three sit within 0.01 of each other, far inside the 0.04 noise band the organisers give
+for this metric, so the ranking among them is not settled. No model beat ours on average; the
+recurrent network was ahead by more than 0.04 on one match of seven. We kept boosted trees: equal
+score, about ten seconds to train, no extra dependency. Two things stand out. Every model gave
+byte-identical output on a second run, including the neural networks on CPU with fixed seeds. And
+every model loses most of its score without the smoother, so the smoother matters more than the
+choice of judge. The comparison code is `scripts/compare_models.py` (it needs PyTorch, which
+`run.py` does not).
+
 ## 6. Limitations and what we would do next
 
 - Stoppages where the ball is still tracked are only partly found: 14.7% of visible-ball frames
