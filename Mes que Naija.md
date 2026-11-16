@@ -50,12 +50,14 @@ weights.
 ## 2. Assets used and dropped
 
 **Used**
+
 - The tracking positions and the ball track of the competition match (`atd_raw` and its metadata),
   only as input to the clues and to the degrade step. They carry no possession labels.
 - The 7 open German matches (section 3), both their tracking and their possession labels.
 - The German event data, only to know where restarts happen, in the tags experiment (dropped, below).
 
 **Tried and dropped**
+
 - *Rules-only version* (no training, hand-written football rules): 0.239 in an earlier
   cross-validation round, below the baseline method (0.276 in that round) and far below the
   trained judge (0.679 in that round).
