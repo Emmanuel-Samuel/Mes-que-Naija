@@ -23,7 +23,7 @@ is not needed. The output must be byte-identical to the file we submitted.
 
 ## Hardware and runtime
 
-Built and tested on an Apple-silicon Mac with 18 cores and 48 GB of memory. RUNTIME_PLACEHOLDER
+Built and tested on an Apple-silicon Mac with 18 cores and 48 GB of memory. A full run of `run.py` from a fresh copy (German files already downloaded, caches built from scratch) took 139 seconds. Downloading the 2.6 GB of German files adds a few minutes, depending on the connection.
 Memory use stays below about 10 GB. No GPU.
 
 ## Folder map
