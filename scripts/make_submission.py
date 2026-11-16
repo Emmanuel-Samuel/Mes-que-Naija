@@ -5,6 +5,7 @@ Needs possession/decoder_settings.json from scripts/cv_german.py. The judge is t
 German matches, each degraded with three seeds. Only whole-match aggregates are printed.
 """
 
+import argparse
 import json
 import os
 import sys
@@ -62,16 +63,31 @@ def build_variant(variant, reference):
     return predict_logp(model, X)
 
 
-def main():
+def make(variant, out_path, reference=None):
+    """Train, decode and write one variant to out_path. Returns the label codes."""
     with open(DECODER_PATH) as f:
         saved = json.load(f)
+    reference = reference or load_cached(REFERENCE)
+    params = DecoderParams(**saved[variant])
+    labels = decode(build_variant(variant, reference), reference.half, params)
+    write(out_path, labels)
+    counts = [int(np.sum(labels == k)) for k in range(3)]
+    print("{}: {} rows, H/A/D = {}/{}/{}, params {}".format(out_path, len(labels), *counts, params))
+    return labels
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--variant", choices=("tags", "no_tags"),
+                        help="only this variant (default: both, into evaluation/results/)")
+    parser.add_argument("--out", help="output CSV path; needs --variant")
+    args = parser.parse_args()
+    if args.out and not args.variant:
+        parser.error("--out needs --variant")
     reference = load_cached(REFERENCE)
     for variant, file_tag in (("tags", "v3_tags"), ("no_tags", "v3_notags")):
-        params = DecoderParams(**saved[variant])
-        labels = decode(build_variant(variant, reference), reference.half, params)
-        write(os.path.join(OUT_DIR, file_tag + ".csv"), labels)
-        counts = [int(np.sum(labels == k)) for k in range(3)]
-        print("{}: {} rows, H/A/D = {}/{}/{}, params {}".format(file_tag, len(labels), *counts, params))
+        if args.variant in (None, variant):
+            make(variant, args.out or os.path.join(OUT_DIR, file_tag + ".csv"), reference)
 
 
 if __name__ == "__main__":
