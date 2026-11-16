@@ -1,3 +1,9 @@
+> **This fork is the solution of team Mes que Naija.**
+> Rebuild our submission file with one command: `python run.py --out "Mes que Naija.csv"`.
+> Install, runtime and folder map: [SOLUTION.md](SOLUTION.md).
+> Technical document: [Mes que Naija.md](Mes%20que%20Naija.md).
+> The original challenge text starts below.
+
 # More than a Hack 2027 — Phase 1: Ball Possession
 
 **Organised by [Metrica Sports](https://metrica-sports.com), [FC Barcelona](https://www.fcbarcelona.com)
