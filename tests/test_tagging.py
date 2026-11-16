@@ -1,9 +1,12 @@
+import os
+
 import numpy as np
 import pytest
 
 from possession.load_idsse import MATCH_IDS
 from possession.load_idsse_events import load_restarts
-from possession.tagging import make_pseudo_tags, phase_possession_sign, tag_features
+from possession.tagging import (OFFSETS_PATH, make_pseudo_tags, phase_possession_sign,
+                                tag_features)
 
 
 def test_tag_features_distances():
@@ -33,6 +36,8 @@ def test_pseudo_tags_deterministic_and_imperfect():
         restarts = load_restarts(MATCH_IDS[0])
     except FileNotFoundError:
         pytest.skip("open data not present")
+    if not os.path.exists(OFFSETS_PATH):
+        pytest.skip("tag aggregates not built; run scripts/tag_stats.py")
     a, b, c = (make_pseudo_tags(restarts, s) for s in (1, 1, 2))
     np.testing.assert_array_equal(a, b)
     assert not np.array_equal(a, c)

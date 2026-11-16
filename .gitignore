@@ -71,3 +71,6 @@ external_data/
 submission/
 .ruff_cache/
 .pytest_cache/
+
+# Summary numbers derived from the competition Smart Tagging; rebuilt by scripts/tag_stats.py.
+possession/tag_offsets.json

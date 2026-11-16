@@ -56,7 +56,10 @@ it if you want to check the numbers in the technical document.
 - The degrade step uses `numpy.random.default_rng([seed, crc32(match name)])`, with seeds 0, 1, 2
   for each training match. Nothing depends on the clock.
 - The judge (`HistGradientBoostingClassifier`) has `random_state=0` and no early stopping.
-- The tags variant (not submitted) seeds its stand-in tags from the match index and seed.
+- The tags variant (not submitted) seeds its stand-in tags from the match index and seed. It
+  needs `possession/tag_offsets.json`, a few summary numbers about the competition's Smart
+  Tagging. That file is not in the repository; `python scripts/tag_stats.py` rebuilds it from the
+  data bundle. `run.py` does not need it.
 - Everything else (clues, translator, smoother) is deterministic.
 - Library versions are pinned in `requirements-solution.txt`; other versions of numpy or
   scikit-learn may change the last decimals and so the file.

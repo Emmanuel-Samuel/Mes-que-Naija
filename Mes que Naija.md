@@ -87,7 +87,13 @@ team labelled a single frame of any match.
 
 - No labels from the competition match were used.
 - We made no hand labels at all.
-- The 5 public minutes were used only as a format and sanity check and never to choose a setting.
+- The 5 public minutes were never used to train the judge or to tune a setting. We did run the
+  official scorer on them once for each of our four versions, as a check that the pipeline was
+  correct, so we saw those scores before we chose the version to submit. Our reasons for the
+  choice were the German-match tests and whole-match totals (section 5), but we cannot show the
+  public scores had no influence. For version 1, the public check also showed that few dead-ball
+  frames were found; we then confirmed the problem without labels (gap 2 in section 1) before
+  changing anything.
 - The competition data was never given to a hosted AI model.
 
 ## 4. The possession rules we implemented
