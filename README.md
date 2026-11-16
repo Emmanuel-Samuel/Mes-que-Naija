@@ -2,6 +2,7 @@
 > Rebuild our submission file with one command: `python run.py --out "Mes que Naija.csv"`.
 > Install, runtime and folder map: [SOLUTION.md](SOLUTION.md).
 > Technical document: [Mes que Naija.md](Mes%20que%20Naija.md).
+> Research log (what we read, measured and tried): [plans/research-log.md](plans/research-log.md).
 > The original challenge text starts below.
 
 # More than a Hack 2027 — Phase 1: Ball Possession
