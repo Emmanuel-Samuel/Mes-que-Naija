@@ -56,16 +56,18 @@ weights.
 - The German event data, only to know where restarts happen, in the tags experiment (dropped, below).
 
 **Tried and dropped**
-- *Rules-only version* (no training, hand-written football rules): 0.239 in cross-validation, far
-  below the trained judge.
+- *Rules-only version* (no training, hand-written football rules): 0.239 in an earlier
+  cross-validation round, below the baseline method (0.276 in that round) and far below the
+  trained judge (0.679 in that round).
 - *Smart Tagging set pieces.* The file has 59 tags that cover 39% of restarts and start about 4.4
   seconds before the restart. We tested the idea with stand-in tags built from German event data:
   no gain (0.719 against 0.719). So the submitted variant does not use tags.
 - *Smart Tagging phase tags.* They agree with our output 75% of the time and we found no fair way to
   validate them, so we left them out.
 - *Homography, broadcast feed and video.* Not needed. The video was never downloaded.
-- *LightGBM.* It needs a system library; scikit-learn's equivalent gives the same results and
-  installs with one command.
+- *LightGBM.* It needs an extra system library on macOS. scikit-learn's model of the same family
+  installs with one command and gave identical output on repeated runs, so we used that. We did
+  not compare the two on score.
 
 ## 3. Training data
 
@@ -105,12 +107,11 @@ spellF1 (the ranking metric) against the translated labels:
 
 | method | spellF1 |
 |---|---|
-| baseline method | 0.300 |
-| rules only | 0.239 |
+| baseline method (nearest player, majority vote over ±50 frames) | 0.300 |
 | ours (submitted, no tags) | 0.719 |
 
-An earlier variant scored 0.747 on easier, less realistic practice data. We do not trust that
-number. On the 5 public minutes ours reaches 0.680 against 0.326 for the baseline, but that is
+An earlier variant scored 0.747, but on easier practice data in which a stopped ball always
+vanished, so the two numbers cannot be compared. On the 5 public minutes ours reaches 0.680 against 0.326 for the baseline, but that is
 only 17 possessions, so it is noisy. Our final file has 225 possessions averaging 15.7 seconds,
 and 44.3% of graded frames are dead (the German matches have 41 to 52%).
 
@@ -123,8 +124,8 @@ and 44.3% of graded frames are dead (the German matches have 41 to 52%).
 - German football and clean German tracking differ from ours in ways whole-match totals cannot
   show.
 - Track swaps and duplicate tracks in our feed are not simulated by the degrade step.
-- The 2-second control rule is our reading of the written rules. With more time we would check it
-  more closely against the 5 public minutes and, if allowed, against labelled Spanish matches.
+- The 2-second control rule is our reading of the written rules. We did not tune it on the
+  5 public minutes. With more time we would test it on labelled matches from other leagues.
 
 ## 7. Reproduction
 
